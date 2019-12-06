@@ -18,13 +18,17 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.navigation.Navigation;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
 
 public class NewBillFragment extends Fragment {
+
+    DecimalFormat df = new DecimalFormat("0.00");
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE, MMM dd, YYYY");
 
     private static final String DIALOG_DATE = "DialogDate";
     private static final int REQUEST_DATE = 0;
@@ -32,7 +36,7 @@ public class NewBillFragment extends Fragment {
     private Bill mBill;
     private Button mDateButton;
     private EditText mTitleField;
-    private EditText mPriceInput;
+    private EditText mAmountInput;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -90,8 +94,8 @@ public class NewBillFragment extends Fragment {
 
         });
 
-        mPriceInput = v.findViewById(R.id.price_input);
-        mPriceInput.addTextChangedListener(new TextWatcher() {
+        mAmountInput = v.findViewById(R.id.price_input);
+        mAmountInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
@@ -126,6 +130,6 @@ public class NewBillFragment extends Fragment {
     }
 
     private void updateDate() {
-        mDateButton.setText(mBill.getDueDate().toString());
+        mDateButton.setText(simpleDateFormat.format(mBill.getDueDate()));
     }
 }

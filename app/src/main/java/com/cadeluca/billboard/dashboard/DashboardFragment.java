@@ -24,6 +24,8 @@ import com.cadeluca.billboard.NewBillActivity;
 import com.cadeluca.billboard.R;
 import com.google.android.material.card.MaterialCardView;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class DashboardFragment extends Fragment {
@@ -150,6 +152,7 @@ public class DashboardFragment extends Fragment {
         private Bill mBill;
         private TextView mTitleTextView;
         private TextView mDateTextView;
+        private TextView mAmountTextView;
         private MaterialCardView mMaterialCardView;
 
         public BillHolder(LayoutInflater inflater, ViewGroup parent) {
@@ -157,8 +160,9 @@ public class DashboardFragment extends Fragment {
             itemView.setOnClickListener(this);
 
             mMaterialCardView = itemView.findViewById(R.id.bill_card);
-            mTitleTextView = itemView.findViewById(R.id.price_title);
-            mDateTextView = itemView.findViewById(R.id.price_date);
+            mTitleTextView = itemView.findViewById(R.id.bill_title);
+            mDateTextView = itemView.findViewById(R.id.bill_due_date);
+            mAmountTextView = itemView.findViewById(R.id.bill_amount);
 
             mMaterialCardView.setOnClickListener(view -> {
                 Intent intent = BillPagerActivity.newIntent(getActivity(), mBill.getId());
@@ -166,11 +170,16 @@ public class DashboardFragment extends Fragment {
             });
         }
 
+        DecimalFormat df = new DecimalFormat("0.00");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE, MMM dd, YYYY");
 
         public void bind(Bill bill) {
             mBill = bill;
             mTitleTextView.setText(mBill.getTitle());
-            mDateTextView.setText(mBill.getDueDate().toString());
+            String dueString = "Due "+simpleDateFormat.format(mBill.getDueDate());
+            mDateTextView.setText(dueString);
+            String amountStr = "$"+df.format(mBill.getAmountDue());
+            mAmountTextView.setText(amountStr);
         }
 
         @Override

@@ -14,20 +14,20 @@
         android:layout_marginEnd="16dp">
 
         <TextView
-            android:textColor="@color/offwhite"
             style="?android:listSeparatorTextViewStyle"
+            android:textColor="@color/offwhite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/bill_title_label" />
 
         <EditText
-            android:textColorHint="@color/offwhite"
-            android:backgroundTint="@color/offwhite"
             android:textColor="@color/offwhite"
             android:id="@+id/price_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/bill_title_hint"
+            android:textColorHint="@color/offwhite"
+            android:backgroundTint="@color/offwhite"
             android:inputType="text"/>
 
     </LinearLayout>
@@ -42,8 +42,8 @@
         android:layout_marginEnd="16dp">
 
         <TextView
-            android:textColor="@color/offwhite"
             style="?android:listSeparatorTextViewStyle"
+            android:textColor="@color/offwhite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/bill_details_label"/>
@@ -62,12 +62,12 @@
 
             <EditText
                 android:id="@+id/price_input"
-                android:textColorHint="@color/offwhite"
-                android:backgroundTint="@color/offwhite"
-                android:textColor="@color/offwhite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/bill_amount_hint"
+                android:textColor="@color/offwhite"
+                android:textColorHint="@color/offwhite"
+                android:backgroundTint="@color/offwhite"
                 android:inputType="numberDecimal" />
 
         </LinearLayout>
@@ -85,26 +85,26 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp">
 
-        <TextView
-            android:textColor="@color/offwhite"
-            style="?android:listSeparatorTextViewStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/bill_date"/>
+    <TextView
+        android:textColor="@color/offwhite"
+        style="?android:listSeparatorTextViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/bill_date"/>
 
-        <Button
-            android:backgroundTint="@color/background_darker"
-            android:id="@+id/price_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
-        <Button
-            android:backgroundTint="@color/background_darker"
-            android:id="@+id/price_save"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/submit_bill"
-            />
+    <Button
+        android:backgroundTint="@color/background_darker"
+        android:id="@+id/price_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <Button
+        android:backgroundTint="@color/background_darker"
+        android:id="@+id/price_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/edit_bill_text"
+        />
 
     </LinearLayout>
 </LinearLayout>

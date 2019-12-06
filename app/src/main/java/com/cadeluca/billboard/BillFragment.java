@@ -6,7 +6,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,6 +22,8 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.UUID;
 
 
@@ -30,12 +31,17 @@ public class BillFragment extends Fragment {
 
     private static final String ARG_BILL_ID = "bill_id";
     private static final String DIALOG_DELETE = "dialog_delete";
+    private static final String DIALOG_DATE = "DialogDate";
+    private static final int REQUEST_DATE = 0;
     private static final int REQUEST_DELETE = 3;
     private Bill mBill;
     private EditText mTitleField;
     private Button mDateButton;
     private Button mSaveEditsButton;
     private EditText mPriceInput;
+
+    DecimalFormat df = new DecimalFormat("0.00");
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE, MMM dd, YYYY");
 
 
     public static BillFragment newInstance(UUID priceId) {
@@ -58,7 +64,7 @@ public class BillFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_price, container, false);
+        View v = inflater.inflate(R.layout.fragment_bill, container, false);
         mTitleField = (EditText) v.findViewById(R.id.price_title);
         mTitleField.setText(mBill.getTitle());
         mTitleField.addTextChangedListener(new TextWatcher() {
@@ -77,8 +83,16 @@ public class BillFragment extends Fragment {
             }
         });
 
-        mDateButton = (Button) v.findViewById(R.id.price_date);
+
+        mDateButton = v.findViewById(R.id.price_date);
         updateDate();
+        mDateButton.setOnClickListener(v14 -> {
+            FragmentManager manager = BillFragment.this.getFragmentManager();
+            DatePickerFragment dialog = DatePickerFragment
+                    .newInstance(mBill.getDueDate());
+            dialog.setTargetFragment(BillFragment.this, REQUEST_DATE);
+            dialog.show(manager, DIALOG_DATE);
+        });
 
         mSaveEditsButton = (Button) v.findViewById(R.id.price_edit);
         mSaveEditsButton.setOnClickListener(view -> {
@@ -111,7 +125,6 @@ public class BillFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        Log.d("myTag", "on pause called");
     }
 
     @Override
@@ -139,7 +152,7 @@ public class BillFragment extends Fragment {
     }
 
     private void updateDate() {
-        mDateButton.setText(mBill.getDueDate().toString());
+        mDateButton.setText(simpleDateFormat.format(mBill.getDueDate()));
     }
 
     @Override
@@ -147,39 +160,4 @@ public class BillFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.fragment_price, menu);
     }
-
-    private String getPriceReport() {
-        String dateFormat = "EEE, MMM dd";
-        String dateString = DateFormat.format(dateFormat, mBill.getDueDate()).toString();
-        String report = "temporary report string";
-        return report;
-    }
-
-
-    /**
-     * Takes in an input string and coverts it to a $_.__ formatted string
-     * @param digits the string (from charSequence) from a view/edit
-     * @return formatted string
-     */
-//    private String addCurrencySign(String digits) {
-//        String amount = "$";
-//        // remove any non numeric chars
-//        digits = digits.replace(".", "");
-//
-//        // Amount length greater than 2 means we need to add a decimal point
-//        if (digits.length() > 2) {
-//            String dollar = digits.substring(0, digits.length() - 2); // Pound part
-//            String cents = digits.substring(digits.length() - 2); // Pence part
-//            amount += dollar + "." + cents;
-//        }
-//        else if (digits.length() == 1) {
-//            amount += "0.0" + digits;
-//        }
-//        else if (digits.length() == 2) {
-//            amount += "0." + digits;
-//        }
-//
-//        return amount;
-//    }
-
 }

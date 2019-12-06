@@ -14,12 +14,16 @@ import com.cadeluca.billboard.BillLab;
 import com.cadeluca.billboard.R;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
+
+    DecimalFormat df = new DecimalFormat("0.00");
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE, MMM dd, YYYY");
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -37,6 +41,7 @@ public class HomeFragment extends Fragment {
         String next = "Your next due bill is: " + testbill.getTitle() + " for $" + df.format(testbill.getAmountDue()) + " by " + testbill.getDueDate();
         textView.setText(next);
 
+        // logic for checking if you have bills due in the next coming weeks
         int noOfDays = 7; // one week later
         Calendar calendar = Calendar.getInstance();
         Date todaysDate = new Date();

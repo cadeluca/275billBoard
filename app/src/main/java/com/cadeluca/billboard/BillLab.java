@@ -32,12 +32,17 @@ public class BillLab {
         return sBillLab;
     }
 
+    /**
+     * Create a BillLab for bill database actions
+     * @param context application context
+     */
     private BillLab(Context context) {
         mContext = context.getApplicationContext();
         mDatabase = new BillBaseHelper(mContext)
                 .getWritableDatabase();
     }
 
+    // this was the hard-coded db population; leaving it in just as a reference
 //    private BillLab(Context context) {
 //        mContext = context.getApplicationContext();
 //        mDatabase = new BillBaseHelper(mContext)
@@ -50,21 +55,33 @@ public class BillLab {
 //        }
 //    }
 
-    void addBill(Bill p) {
-        ContentValues values = getContentValues(p);
+    /**
+     * Add a bill to the database
+     * @param b the bill to add
+     */
+    void addBill(Bill b) {
+        ContentValues values = getContentValues(b);
         Log.i("myTag", "add bill called");
         mDatabase.insert(BillTable.NAME, null, values);
     }
 
-    void deleteBill(Bill p) {
+    /**
+     * Delete a bill from the database
+     * @param b the bill to delete
+     */
+    void deleteBill(Bill b) {
         mDatabase.delete(
                 BillTable.NAME,
                 BillTable.Cols.UUID + " = ?",
-                new String[] {p.getId().toString()}
+                new String[] {b.getId().toString()}
         );
     }
 
 
+    /**
+     * Get a list of bill objects
+     * @return the bill list
+     */
     public List<Bill> getBills() {
         List<Bill> bills = new ArrayList<>();
         try (BillCursorWrapper cursor = queryBills(null, null, null)) {
@@ -77,6 +94,10 @@ public class BillLab {
         return bills;
     }
 
+    /**
+     * @param sortType type to sort by
+     * @return List of bills, sorted
+     */
     public List<Bill> getBills(String sortType) {
         List<Bill> bills = new ArrayList<>();
         try (BillCursorWrapper cursor = queryBills(null, null, sortType)) {
@@ -90,6 +111,10 @@ public class BillLab {
     }
 
 
+    /**
+     * @param id the UUID of the bill
+     * @return bill object
+     */
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     Bill getBill(UUID id) {
         try (BillCursorWrapper cursor = queryBills(
@@ -105,6 +130,10 @@ public class BillLab {
     }
 
 
+    /**
+     * Update the bill in the database
+     * @param bill bill to update
+     */
     void updateBill(Bill bill) {
         String uuidString = bill.getId().toString();
         ContentValues values = getContentValues(bill);
@@ -114,6 +143,12 @@ public class BillLab {
         Log.d("myTag", "update bill called");
     }
 
+    /**
+     * @param whereClause optional where clause
+     * @param whereArgs optional where args
+     * @param sortType optional sorttype
+     * @return CurserWrapper with cursor
+     */
     private BillCursorWrapper queryBills(String whereClause, String[] whereArgs, String sortType) {
         Cursor cursor;
 
@@ -143,6 +178,10 @@ public class BillLab {
         return new BillCursorWrapper(cursor);
     }
 
+    /**
+     * @param bill bill to retrieve values
+     * @return ContentValues of bill data
+     */
     private static ContentValues getContentValues(Bill bill) {
         ContentValues values = new ContentValues();
         values.put(BillTable.Cols.UUID, bill.getId().toString());
