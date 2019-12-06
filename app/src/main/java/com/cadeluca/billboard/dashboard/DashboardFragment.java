@@ -130,7 +130,6 @@ public class DashboardFragment extends Fragment {
         BillLab billLab = BillLab.get(getActivity());
         List<Bill> bills;
 
-        // todo swtich
         if (mIsSort) {
             bills = billLab.getBills("amount");
         } else {

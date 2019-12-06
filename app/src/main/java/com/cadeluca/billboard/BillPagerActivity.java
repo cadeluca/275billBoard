@@ -11,8 +11,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.cadeluca.billboard.R;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -48,6 +46,10 @@ public class BillPagerActivity extends AppCompatActivity {
                 return BillFragment.newInstance(bill.getId());
             }
 
+            /**
+             * Get count of bills
+             * @return integer count
+             */
             @Override
             public int getCount() {
                 return mBills.size();

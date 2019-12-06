@@ -40,7 +40,7 @@ public class NewBillFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
-        Objects.requireNonNull(Objects.requireNonNull(activity).getSupportActionBar()).setTitle("Add a Bill"); //todo: make a string
+        Objects.requireNonNull(Objects.requireNonNull(activity).getSupportActionBar()).setTitle(getString(R.string.add_a_bill));
         mBill = new Bill();
     }
 
@@ -82,7 +82,7 @@ public class NewBillFragment extends Fragment {
         mSaveBillButton.setOnClickListener(view -> {
             // add the bill to the BillLab
             BillLab.get(getActivity()).addBill(mBill);
-            Toast toast; // todo: add string
+            Toast toast;
             toast = Toast.makeText(getContext(), R.string.add_bill_success, Toast.LENGTH_SHORT);
             toast.show();
             // go to bill list after adding a bill

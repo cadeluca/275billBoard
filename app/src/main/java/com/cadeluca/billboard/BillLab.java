@@ -188,7 +188,6 @@ public class BillLab {
         values.put(TITLE, bill.getTitle());
         values.put(DATE, bill.getDueDate().getTime());
         values.put(AMOUNT, bill.getAmountDue());
-        // todo add paid grab
         float f = bill.getAmountDue();
         Log.d("myTag", Float.toString(f));
         return values;
