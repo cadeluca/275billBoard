@@ -1,5 +1,5 @@
 # CS 275 Mobile Application Development I - BillBoard
-BillBoard is a simple app two page app with bottom navigation. 
+BillBoard is a simple two page app with bottom navigation. 
 The home page displays stats about your bills:
 * What your next due bill is.
 * What bills you have due within 7 days.
