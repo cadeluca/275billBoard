@@ -5,12 +5,13 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:padding="5dp"
-        android:id="@+id/text_home"
+        android:padding="8dp"
+        android:background="@color/background_darker"
+        android:id="@+id/next_bill"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:textAlignment="center"
         android:textSize="20sp"
@@ -19,8 +20,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/text_home2"
-        android:padding="5dp"
+        android:id="@+id/total_bills_and_owed"
+        android:layout_marginTop="16dp"
+        android:background="@color/background_darker"
+        android:padding="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -30,11 +33,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_home" />
+        app:layout_constraintTop_toBottomOf="@+id/next_bill" />
 
     <TextView
-        android:id="@+id/text_home3"
-        android:padding="5dp"
+        android:id="@+id/this_week"
+        android:layout_marginTop="16dp"
+        android:background="@color/background_darker"
+        android:padding="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -44,20 +49,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_home2" />
-
-    <TextView
-        android:id="@+id/text_home4"
-        android:padding="5dp"
-        android:background="@color/cardview_dark_background"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_home3" />
+        app:layout_constraintTop_toBottomOf="@+id/total_bills_and_owed" />
 </androidx.constraintlayout.widget.ConstraintLayout>

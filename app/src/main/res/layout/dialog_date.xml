@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DatePicker
+    android:calendarTextColor="#000000"
     android:calendarViewShown="false"
     android:layout_height="wrap_content"
     android:layout_width="wrap_content"

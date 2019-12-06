@@ -24,6 +24,7 @@ import androidx.fragment.app.FragmentManager;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 
@@ -40,6 +41,7 @@ public class BillFragment extends Fragment {
     private Button mSaveEditsButton;
     private EditText mPriceInput;
 
+    // decimal format for amount due
     DecimalFormat df = new DecimalFormat("0.00");
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE, MMM dd, YYYY");
 
@@ -84,7 +86,7 @@ public class BillFragment extends Fragment {
         });
 
 
-        mDateButton = v.findViewById(R.id.price_date);
+        mDateButton = v.findViewById(R.id.bill_date);
         updateDate();
         mDateButton.setOnClickListener(v14 -> {
             FragmentManager manager = BillFragment.this.getFragmentManager();
@@ -98,7 +100,8 @@ public class BillFragment extends Fragment {
         mSaveEditsButton.setOnClickListener(view -> {
             Log.d("myTag", "Clicked saved edits");
             BillLab.get(getActivity()).updateBill(mBill);
-            Toast toast = Toast.makeText(getContext(), "Edited price successfully!", Toast.LENGTH_SHORT);
+            Toast toast;
+            toast = Toast.makeText(getContext(), R.string.bill_edit_success, Toast.LENGTH_SHORT);
             toast.show();
         });
 
@@ -134,6 +137,11 @@ public class BillFragment extends Fragment {
         } else if (requestCode == REQUEST_DELETE) {
             BillLab.get(getActivity()).deleteBill(mBill);
             getActivity().finish();
+        } else if (requestCode == REQUEST_DATE) {
+            Date date = (Date) data
+                    .getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+            mBill.setDueDate(date);
+            updateDate();
         }
     }
 
@@ -151,6 +159,9 @@ public class BillFragment extends Fragment {
         }
     }
 
+    /**
+     * Update the date button display with the new dude date
+     */
     private void updateDate() {
         mDateButton.setText(simpleDateFormat.format(mBill.getDueDate()));
     }

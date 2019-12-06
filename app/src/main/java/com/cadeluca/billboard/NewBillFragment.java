@@ -19,16 +19,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
 
 public class NewBillFragment extends Fragment {
-
-    DecimalFormat df = new DecimalFormat("0.00");
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE, MMM dd, YYYY");
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE, MMM dd, YYYY");
 
     private static final String DIALOG_DATE = "DialogDate";
     private static final int REQUEST_DATE = 0;
@@ -69,7 +66,7 @@ public class NewBillFragment extends Fragment {
             }
         });
 
-        mDateButton = v.findViewById(R.id.price_date);
+        mDateButton = v.findViewById(R.id.bill_date);
         updateDate();
         mDateButton.setOnClickListener(v14 -> {
             FragmentManager manager = NewBillFragment.this.getFragmentManager();
@@ -85,11 +82,10 @@ public class NewBillFragment extends Fragment {
         mSaveBillButton.setOnClickListener(view -> {
             // add the bill to the BillLab
             BillLab.get(getActivity()).addBill(mBill);
-            Toast toast = Toast.makeText(getContext(), "Added bill successfully!", Toast.LENGTH_SHORT); // todo: add string
+            Toast toast; // todo: add string
+            toast = Toast.makeText(getContext(), R.string.add_bill_success, Toast.LENGTH_SHORT);
             toast.show();
             // go to bill list after adding a bill
-//            Navigation.findNavController(v).navigate(R.id.action_add_bill_to_nav_list2);
-            // go back to listFragment
             getActivity().finish();
 
         });
@@ -129,6 +125,9 @@ public class NewBillFragment extends Fragment {
         }
     }
 
+    /**
+     * Update the date button display with the new dude date
+     */
     private void updateDate() {
         mDateButton.setText(simpleDateFormat.format(mBill.getDueDate()));
     }

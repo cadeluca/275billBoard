@@ -4,14 +4,12 @@
 
     <item
         android:id="@+id/show_subtitle"
-        android:background="@color/background_darker"
         android:title="@string/show_subtitle"
         app:showAsAction="never"
     />
 
     <item
         android:id="@+id/price_sort"
-        android:background="@color/background_darker"
         android:title="@string/price_sort"
         app:showAsAction="never"/>
 

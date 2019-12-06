@@ -24,4 +24,6 @@
     <string name="add_bill">Add Bill</string>
     <string name="price_sort">Sort by lowest amount due</string>
     <string name="default_order">Sort by nearest due date</string>
+    <string name="bill_edit_success">Edited bill successfully!</string>
+    <string name="add_bill_success">Added bill successfully!</string>
 </resources>
